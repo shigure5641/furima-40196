@@ -20,17 +20,17 @@
 
 
 ## products テーブル
-| column               | type        | options                       |  
-|----------------------|-------------|-------------------------------|  
-| user                 | references  | null: false foreign_key: true |  
-| name                 | string      | null: false                   |  
-| describe             | text        | null: false                   |  
-| category             | integer     | null: false                   |  
-| status               | integer     | null: false                   |  
-| shipping_cost        | integer     | null: false                   |  
-| prefectures          | integer     | null: false                   |  
-| shipping_days        | integer     | null: false                   |  
-| product_price        | integer     | null: false                   |  
+| column                  | type        | options                        |  
+|-------------------------|-------------|--------------------------------|  
+| user                    | references  | null: false, foreign_key: true |  
+| name                    | string      | null: false                    |  
+| describe                | text        | null: false                    |  
+| category_id             | integer     | null: false, foreign_key: true |  
+| status_id               | integer     | null: false, foreign_key: true |  
+| shipping_cost_id        | integer     | null: false, foreign_key: true |  
+| prefectures_id          | integer     | null: false, foreign_key: true |  
+| shipping_days_id        | integer     | null: false, foreign_key: true |  
+| product_price           | integer     | null: false                    |  
 
 ## アソシエーション
 - belongs_to : usersテーブル
@@ -43,10 +43,10 @@
 
 
 ## orders テーブル
-| column               | type        | options                       |  
-|----------------------|-------------|-------------------------------|  
-| user                 | references  | null: false foreign_key: true |  
-| product              | references  | null: false foreign_key: true |  
+| column               | type        | options                        |  
+|----------------------|-------------|--------------------------------|  
+| user                 | references  | null: false, foreign_key: true |  
+| product              | references  | null: false, foreign_key: true |  
 
 ## アソシエーション
 - belongs_to : users
@@ -55,15 +55,15 @@
 
 
 ## shipping_addresses テーブル
-| column               | type        | options                       |  
-|----------------------|-------------|-------------------------------|  
-| order                | references  | null: false foreign_key: true |  
-| postcode             | string      | null: false                   |  
-| prefectures          | integer     | null: false                   |  
-| municipalities       | string      | null: false                   |  
-| street_address       | string      | null: false                   |  
-| building_name        | string      |                               |  
-| telephone_number     | string      | null: false                   |  
+| column                  | type        | options                        |  
+|-------------------------|-------------|--------------------------------|  
+| order                   | references  | null: false, foreign_key: true |  
+| postcode                | string      | null: false                    |  
+| prefectures_id          | integer     | null: false, foreign_key: true |  
+| municipalities          | string      | null: false                    |  
+| street_address          | string      | null: false                    |  
+| building_name           | string      |                                |  
+| telephone_number        | string      | null: false                    |  
 
 ## アソシエーション
 - has_one : orders
