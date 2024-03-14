@@ -1,65 +1,70 @@
 # テーブル設計
 
-##users テーブル
-| column                             | type        | options                   |
-| nickname                           | string      | null: false               |
-| mail_address                       | string      | null: false               |
-| password                           | string      | null: false               |
-| password_confirmation              | string      | null: false               |
-| last_name                          | string      | null: false               |
-| first_name                         | string      | null: false               |
-| last_name_kana                     | string      | null: false               |
-| first_name_kana                    | string      | null: false               |
-| birthday                           | date        | null: false               |
+## users テーブル  
 
-##アソシエーション
--has_many : products
--has_many : orders
+| column                             | type        | options                   |  
+|------------------------------------|-------------|---------------------------|  
+| nickname                           | string      | null: false               |  
+| email                              | string      | null: false, unique: true |  
+| encrypted_password                 | string      | null: false               |  
+| password_confirmation              | string      | null: false               |  
+| last_name                          | string      | null: false               |  
+| first_name                         | string      | null: false               |  
+| last_name_kana                     | string      | null: false               |  
+| first_name_kana                    | string      | null: false               |  
+| birthday                           | date        | null: false               |  
 
-
-##products テーブル
-| column               | type        | options                       |
-| user_id              | references  | null: false foreign_key: true |
-| name                 | string      | null: false                   |
-| describe             | text        | null: false                   |
-| category             | integer     | null: false                   |
-| status               | integer     | null: false                   |
-| shipping_cost        | integer     | null: false                   |
-| prefectures          | integer     | null: false                   |
-| shipping_days        | integer     | null: false                   |
-| product_price        | integer     | null: false                   |
-
-##アソシエーション
--belongs_to : usersテーブル
--has_one    : ordersテーブル
--belongs_to_active_hash : category
--belongs_to_active_hash : status
--belongs_to_active_hash : shipping_cost
--belongs_to_active_hash : prefectures
--belongs_to_active_hash : shipping_days
+## アソシエーション
+- has_many : products
+- has_many : orders
 
 
-##orders テーブル
-| column               | type        | options                       |
-| user_id              | references  | null: false foreign_key: true |
-| product_id           | references  | null: false foreign_key: true |
+## products テーブル
+| column               | type        | options                       |  
+|----------------------|-------------|-------------------------------|  
+| user                 | references  | null: false foreign_key: true |  
+| name                 | string      | null: false                   |  
+| describe             | text        | null: false                   |  
+| category             | integer     | null: false                   |  
+| status               | integer     | null: false                   |  
+| shipping_cost        | integer     | null: false                   |  
+| prefectures          | integer     | null: false                   |  
+| shipping_days        | integer     | null: false                   |  
+| product_price        | integer     | null: false                   |  
 
-##アソシエーション
--belongs_to : usersテーブル
--belongs_to : ordersテーブル
--belongs_to : shipping_addressesテーブル
+## アソシエーション
+- belongs_to : usersテーブル
+- has_one : ordersテーブル
+- belongs_to_active_hash : category
+- belongs_to_active_hash : status
+- belongs_to_active_hash : shipping_cost
+- belongs_to_active_hash : prefectures
+- belongs_to_active_hash : shipping_days
 
 
-##shipping_addresses テーブル
-| column               | type        | options                       |
-| order_id             | references  | null: false foreign_key: true |
-| postcode             | integer     | null: false                   |
-| prefectures          | integer     | null: false                   |
-| municipalities       | string      | null: false                   |
-| street_address       | string      | null: false                   |
-| Building_name        | string      | null: false                   |
-| telephone_number     | integer     | null: false                   |
+## orders テーブル
+| column               | type        | options                       |  
+|----------------------|-------------|-------------------------------|  
+| user                 | references  | null: false foreign_key: true |  
+| product              | references  | null: false foreign_key: true |  
 
-##アソシエーション
--has_one : ordersテーブル
--belongs_to_active_hash : prefectures
+## アソシエーション
+- belongs_to : users
+- belongs_to : orders
+- belongs_to : shipping_addresses
+
+
+## shipping_addresses テーブル
+| column               | type        | options                       |  
+|----------------------|-------------|-------------------------------|  
+| order                | references  | null: false foreign_key: true |  
+| postcode             | string      | null: false                   |  
+| prefectures          | integer     | null: false                   |  
+| municipalities       | string      | null: false                   |  
+| street_address       | string      | null: false                   |  
+| building_name        | string      |                               |  
+| telephone_number     | string      | null: false                   |  
+
+## アソシエーション
+- has_one : orders
+- belongs_to_active_hash : prefectures
