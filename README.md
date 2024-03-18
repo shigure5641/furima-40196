@@ -32,8 +32,8 @@
 | product_price           | integer     | null: false                    |  
 
 ## アソシエーション
-- belongs_to: userテーブル
-- has_one: orderテーブル
+- belongs_to: user
+- has_one: order
 - belongs_to_active_hash: category
 - belongs_to_active_hash: status
 - belongs_to_active_hash: shipping_cost
@@ -50,7 +50,7 @@
 ## アソシエーション
 - belongs_to: user
 - belongs_to: order
-- belongs_to: shipping_address
+- has_one: shipping_address
 
 
 ## shipping_addresses テーブル
@@ -58,7 +58,7 @@
 |-------------------------|-------------|--------------------------------|  
 | order                   | references  | null: false, foreign_key: true |  
 | postcode                | string      | null: false                    |  
-| prefectures_id          | integer     | null: false                    |  
+| prefecture_id           | integer     | null: false                    |  
 | municipalities          | string      | null: false                    |  
 | street_address          | string      | null: false                    |  
 | building_name           | string      |                                |  
