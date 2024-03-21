@@ -49,7 +49,7 @@
 
 ## アソシエーション
 - belongs_to: user
-- belongs_to: order
+- belongs_to: product
 - has_one: shipping_address
 
 
