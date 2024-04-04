@@ -3,6 +3,7 @@ function tax () {
   const addTaxPrice = document.getElementById("add-tax-price");
   const profit = document.getElementById("profit");
 
+  if(itemPrice && addTaxPrice && profit) {
   itemPrice.addEventListener('input',() => {
     const price = itemPrice.value;
     const taxPrice = Math.floor(price * 0.1);
@@ -11,5 +12,6 @@ function tax () {
     addTaxPrice.innerHTML = taxPrice;
     profit.innerHTML = salesProfit;
   });
+ }
 }
-window.addEventListener("load", tax);
+window.addEventListener("DOMContentLoaded", tax);
