@@ -95,6 +95,18 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include('Product price is not a number')
       end
+
+      it 'product_priceの金額に小数点が含まれる場合､出品できない' do
+        @product.product_price = 300.00
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Product price must be an integer')
+      end
+
+      it 'userが紐づけられていない場合､出品できない' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include('User must exist')
+      end
     end
   end
 end
