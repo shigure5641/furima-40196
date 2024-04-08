@@ -14,4 +14,4 @@ function tax () {
   });
  }
 }
-window.addEventListener("DOMContentLoaded", tax);
+window.addEventListener("turbo:load", tax);
