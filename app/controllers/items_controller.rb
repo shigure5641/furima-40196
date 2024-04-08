@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
     if @product.save
       redirect_to '/'
     else
-      render action: :new, status: :unprocessable_entity 
+      render :new, status: :unprocessable_entity
     end
   end
 
