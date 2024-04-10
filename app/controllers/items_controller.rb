@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @product = Product.find_by(params[:id])
   end
 
   private
