@@ -33,6 +33,7 @@
 
     <%= form_with model: @order_form, url: item_orders_path(@item.id), method: :post, local: true do |f| %>
 
+    <%= render 'shared/error_messages', model: f.object %>
 
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
