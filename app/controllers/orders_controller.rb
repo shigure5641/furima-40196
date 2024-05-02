@@ -13,15 +13,15 @@ def create
       @order_form.save
       redirect_to root_path
     else
-      render :index
+      render :index, status: :unprocessable_entity
     end
 end
 
   private
 
   def order_params
-    binding.pry
-    params.require(:order_form).permit(:postcode, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number).merge(user_id: current_user.id, product_id: params[:product_id])
+    params.require(:order_form).permit(:postcode, :prefecture_id, :municipalities, :street_address, 
+    :building_name, :telephone_number).merge(user_id: current_user.id, product_id: params[:item_id])
   end
 
   def non_purchased_item
