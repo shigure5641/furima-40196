@@ -23,9 +23,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return if @product.user == current_user
-
+    if @product.user == current_user && @product.order.nil?
+    else
     redirect_to root_path
+    end
   end
 
   def update
