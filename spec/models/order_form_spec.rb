@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
   before do
-    @order_form = FactoryBot.build(:order_form)
+    @user = FactoryBot.create(:user)
+    @product = FactoryBot.create(:product)
+    @order_form = FactoryBot.build(:order_form, user_id: @user.id, product_id: @product.id)
+    sleep 0.1
   end
 
   describe '配送先情報の保存' do
@@ -14,7 +17,7 @@ RSpec.describe OrderForm, type: :model do
         @order_form.user_id = 1
         expect(@order_form).to be_valid
       end
-      it 'item_idが空でなければ保存できる' do
+      it 'product_idが空でなければ保存できる' do
         @order_form.product_id = 1
         expect(@order_form).to be_valid
       end
@@ -38,8 +41,13 @@ RSpec.describe OrderForm, type: :model do
         @order_form.building_name = nil
         expect(@order_form).to be_valid
       end
-      it '電話番号が11番桁以内かつハイフンなしであれば保存できる' do
+      it '電話番号が11桁かつハイフンなしであれば保存できる' do
         @order_form.telephone_number = 12_345_678_910
+        expect(@order_form).to be_valid
+      end
+
+      it '電話番号が10桁でも保存できる' do
+        @order_form.telephone_number = 12_345_678_91
         expect(@order_form).to be_valid
       end
     end
@@ -100,6 +108,13 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include('Telephone number is invalid')
       end
+
+      it '電話番号が9桁以下の場合､保存できないこと' do
+        @order_form.telephone_number = 12_345_678_9
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include('Telephone number is invalid')
+      end
+
       it 'tokenが空だと保存できない' do
         @order_form.token = nil
         @order_form.valid?
